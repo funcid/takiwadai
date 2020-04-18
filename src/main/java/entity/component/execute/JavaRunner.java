@@ -6,7 +6,7 @@ import java.io.*;
 
 /**
  * @author func 17.04.2020
- * @project MetaTesting
+ * @project Takiwadai
  */
 public class JavaRunner implements Runner {
 

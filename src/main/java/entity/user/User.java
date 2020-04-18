@@ -2,7 +2,7 @@ package entity.user;
 
 /**
  * @author func 18.04.2020
- * @project MetaTesting
+ * @project Takiwadai
  */
 public class User {
 

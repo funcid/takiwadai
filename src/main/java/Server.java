@@ -5,16 +5,16 @@ import java.io.File;
 
 /**
  * @author func 17.04.2020
- * @project MetaTesting
+ * @project Takiwadai
  */
 public class Server {
     public static void main(String[] args) throws Exception {
         Component component = Component.builder()
                 .crash(false)
-                .lang(Lang.PYTHON3)
+                .lang(Lang.RUBY)
                 .id(1)
-                .file(new File("C:\\Users\\func\\Desktop\\Takiwadai\\src\\main\\resources\\main.py"))
+                .file(new File("C:\\Users\\func\\Desktop\\Takiwadai\\src\\main\\resources\\script.rb"))
                 .build();
-        Lang.PYTHON3.getRunner().execute(component);
+        Lang.RUBY.getRunner().execute(component);
     }
 }

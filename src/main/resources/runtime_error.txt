@@ -1,0 +1,1 @@
+script.rb:2:in `<main>': undefined method `chomp' for nil:NilClass (NoMethodError)

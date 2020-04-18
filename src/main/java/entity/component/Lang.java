@@ -1,8 +1,6 @@
 package entity.component;
 
-import entity.component.execute.Python3Runner;
-import entity.component.execute.Runner;
-import entity.component.execute.JavaRunner;
+import entity.component.execute.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,7 +8,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Lang {
 
+    RUBY("Ruby", new RubyRunner()),
     PYTHON3("Python 3", new Python3Runner()),
+    PHP("PHP", new PhpRunner()),
     JAVA("Java 8", new JavaRunner()),;
 
     private String name;
