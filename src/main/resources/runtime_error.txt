@@ -1,2 +1,0 @@
-Exception in thread "main" java.lang.RuntimeException
-	at Test.main(Test.java:7)

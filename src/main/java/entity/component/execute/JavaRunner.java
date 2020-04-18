@@ -13,8 +13,6 @@ public class JavaRunner implements Runner {
     private static final String JAVAC_PATH = "C:\\Program Files\\Java\\jdk1.8.0_241\\bin\\javac.exe";
     private static final String JAVA_PATH = "C:\\Program Files\\Java\\jdk1.8.0_241\\bin\\java.exe";
 
-    private static final String PATH = "C:\\Users\\func\\Desktop\\MetaTesting\\src\\main\\resources";
-
     @Override
     public Runner execute(Component component) throws Exception {
         Process process = cmd.command("cmd.exe", "/c", "\"" + JAVAC_PATH + "\" " + component.getFile().getAbsolutePath())
