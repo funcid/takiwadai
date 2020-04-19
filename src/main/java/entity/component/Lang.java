@@ -1,6 +1,9 @@
 package entity.component;
 
 import entity.component.execute.*;
+import entity.component.execute.simple.PhpRunner;
+import entity.component.execute.simple.Python3Runner;
+import entity.component.execute.simple.RubyRunner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

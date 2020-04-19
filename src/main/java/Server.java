@@ -11,10 +11,10 @@ public class Server {
     public static void main(String[] args) throws Exception {
         Component component = Component.builder()
                 .crash(false)
-                .lang(Lang.RUBY)
+                .lang(Lang.PYTHON3)
                 .id(1)
-                .file(new File("C:\\Users\\func\\Desktop\\Takiwadai\\src\\main\\resources\\script.rb"))
+                .file(new File("C:\\Users\\func\\Desktop\\Takiwadai\\src\\main\\resources\\main.py"))
                 .build();
-        Lang.RUBY.getRunner().execute(component);
+        Lang.PYTHON3.getRunner().execute(component);
     }
 }
