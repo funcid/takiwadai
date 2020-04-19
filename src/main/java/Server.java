@@ -11,10 +11,10 @@ public class Server {
     public static void main(String[] args) throws Exception {
         Component component = Component.builder()
                 .crash(false)
-                .lang(Lang.PYTHON3)
+                .lang(Lang.JAVA)
                 .id(1)
-                .file(new File("C:\\Users\\func\\Desktop\\Takiwadai\\src\\main\\resources\\main.py"))
+                .file(new File("C:\\Users\\func\\Desktop\\Takiwadai\\src\\main\\resources\\Test.java"))
                 .build();
-        Lang.PYTHON3.getRunner().execute(component);
+        Lang.JAVA.getRunner().execute(component);
     }
 }

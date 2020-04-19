@@ -13,15 +13,15 @@ import java.io.File;
  */
 @AllArgsConstructor
 @Setter
-public class SimpleRunner implements Runner {
+public class ScriptRunner implements Runner {
 
-    private String commandFormat;
-    private String langPath;
+    private String commandPattern;
+    private String executorPath;
 
     @Override
     public Runner execute(Component component) throws Exception {
-        cmd.command("cmd.exe", "/c", commandFormat
-                .replace("{$PATH}", langPath)
+        cmd.command("cmd.exe", "/c", commandPattern
+                .replace("{$PATH}", executorPath)
                 .replace("{$ABS_FILE}", component.getFile().getAbsolutePath())
                 .replace("{$FILE}", component.getFile().getName())
         ).directory(new File(PATH))

@@ -15,26 +15,21 @@ public class JavaRunner implements Runner {
 
     @Override
     public Runner execute(Component component) throws Exception {
-        Process process = cmd.command("cmd.exe", "/c", "\"" + JAVAC_PATH + "\" " + component.getFile().getAbsolutePath())
+
+        // Компилирование: .java -> .class
+        File file = new File(component.getFile().getAbsolutePath());
+        Process process = cmd.command("cmd.exe", "/c", "\"" + JAVAC_PATH + "\" " + file)
                 .redirectError(new File(PATH, "compile_error.txt"))
                 .start();
 
-        StringBuilder stringBuilder = new StringBuilder("Ошибка! ");
-
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line).append("\n");
-            }
-            if (stringBuilder.length() > 8) {
-                component.setCrash(true);
-                return this;
-            }
+            component.setCrash(reader.readLine() == null);
         }
 
         component.setFile(new File(component.getFile().getAbsolutePath().replace(".java", ".class")));
         process.waitFor();
 
+        // Запуск .class файла
         cmd.command("cmd.exe", "/c", "\"" + JAVA_PATH + "\" " + component.getFile().getName().split("\\.")[0])
                 .directory(new File(PATH))
                 .redirectInput(new File(PATH, "input.txt"))
@@ -42,6 +37,10 @@ public class JavaRunner implements Runner {
                 .redirectError(new File(PATH, "runtime_error.txt"))
                 .start()
                 .waitFor();
+
+        // Удаление .class файла
+        if (component.getFile().delete())
+            component.setFile(file);
         return this;
     }
 }
