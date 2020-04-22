@@ -10,5 +10,7 @@ public class User {
     private String password;
     private String email;
     private boolean activated;
+    private UserPost userPost;
     private String activationCode;
+    private long registrationTimestamp;
 }

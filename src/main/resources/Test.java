@@ -5,6 +5,7 @@ public class Test {
         Scanner var1 = new Scanner(System.in);
         if (var1.nextLine().equals("1")) {
             System.out.println(1);
+            int i = 1/0;
         }
     }
 }

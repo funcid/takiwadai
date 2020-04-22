@@ -1,9 +1,6 @@
 package entity.component;
 
 import entity.component.execute.*;
-import entity.component.execute.simple.PhpRunner;
-import entity.component.execute.simple.Python3Runner;
-import entity.component.execute.simple.RubyRunner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,10 +8,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Lang {
 
-    RUBY("Ruby", new RubyRunner()),
-    PYTHON3("Python 3", new Python3Runner()),
-    PHP("PHP", new PhpRunner()),
-    JAVA("Java 8", new JavaRunner()),;
+    RUBY("Ruby", new ScriptRunner("\"{$PATH}\" {$FILE}", "C:\\Program Files\\ruby\\bin\\ruby.exe")),
+    PYTHON3("Python 3", new ScriptRunner("{$ABS_FILE}", "")),
+    PHP("PHP", new ScriptRunner("\"{$PATH}\" {$FILE}", "C:\\Program Files\\php\\php.exe")),
+    JAVA("Java 8", new JavaRunner()),
+    PERL("Perl", new ScriptRunner("\"{$PATH}\" {$FILE}", "C:\\Perl64\\bin\\perl.exe")),;
 
     private String name;
     private Runner runner;

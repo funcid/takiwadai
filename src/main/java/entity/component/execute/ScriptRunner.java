@@ -1,4 +1,4 @@
-package entity.component.execute.simple;
+package entity.component.execute;
 
 import entity.component.Component;
 import entity.component.execute.Runner;

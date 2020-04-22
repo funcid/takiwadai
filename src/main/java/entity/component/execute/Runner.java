@@ -4,7 +4,7 @@ import entity.component.Component;
 
 @FunctionalInterface
 public interface Runner {
-    String PATH = "C:\\Users\\func\\Desktop\\Takiwadai\\src\\main\\resources";
+    String PATH = "C:\\Projects\\Takiwadai\\src\\main\\resources";
     ProcessBuilder cmd = new ProcessBuilder();
 
     Runner execute(Component component) throws Exception;
