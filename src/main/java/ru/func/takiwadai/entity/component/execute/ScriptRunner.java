@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/main/java/entity/component/execute/ScriptRunner.java
-package entity.component.execute;
-=======
 package ru.func.takiwadai.entity.component.execute;
->>>>>>> master:src/main/java/ru/func/takiwadai/entity/component/execute/ScriptRunner.java
 
 import ru.func.takiwadai.entity.component.Component;
 import ru.func.takiwadai.entity.component.execute.Runner;
