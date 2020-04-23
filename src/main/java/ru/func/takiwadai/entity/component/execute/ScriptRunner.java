@@ -1,4 +1,4 @@
-package ru.func.takiwadai.entity.component.execute.simple;
+package ru.func.takiwadai.entity.component.execute;
 
 import ru.func.takiwadai.entity.component.Component;
 import ru.func.takiwadai.entity.component.execute.Runner;
