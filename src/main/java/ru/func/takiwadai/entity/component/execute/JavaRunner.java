@@ -1,12 +1,12 @@
-package entity.component.execute;
+package ru.func.takiwadai.entity.component.execute;
 
-import entity.component.Component;
+import ru.func.takiwadai.entity.component.Component;
 
 import java.io.*;
 
 /**
  * @author func 17.04.2020
- * @project Takiwadai
+ * @project ru.func.takiwadai.Takiwadai
  */
 public class JavaRunner implements Runner {
 
@@ -18,8 +18,8 @@ public class JavaRunner implements Runner {
 
         // Компилирование: .java -> .class
         File file = new File(component.getFile().getAbsolutePath());
-        Process process = cmd.command("cmd.exe", "/c", "\"" + JAVAC_PATH + "\" " + file)
-                .redirectError(new File(PATH, "compile_error.txt"))
+        Process process = CMD.command("cmd.exe", "/c", "\"" + JAVAC_PATH + "\" " + file)
+                .redirectError(new File(PATH, "run/compile_error.txt"))
                 .start();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
@@ -30,11 +30,11 @@ public class JavaRunner implements Runner {
         process.waitFor();
 
         // Запуск .class файла
-        cmd.command("cmd.exe", "/c", "\"" + JAVA_PATH + "\" " + component.getFile().getName().split("\\.")[0])
+        CMD.command("cmd.exe", "/c", "\"" + JAVA_PATH + "\" " + component.getFile().getName().split("\\.")[0])
                 .directory(new File(PATH))
-                .redirectInput(new File(PATH, "input.txt"))
-                .redirectOutput(new File(PATH, "output.txt"))
-                .redirectError(new File(PATH, "runtime_error.txt"))
+                .redirectInput(new File(PATH, "run/input.txt"))
+                .redirectOutput(new File(PATH, "run/output.txt"))
+                .redirectError(new File(PATH, "run/runtime_error.txt"))
                 .start()
                 .waitFor();
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Takiwadai</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/background.css">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <a class="nav-link" href="#">что?<img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
+        <a class="nav-link" href="/"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
+        <a class="nav-link"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
+    </div>
+</nav>
+<div class="container mb-0 mt-5 main">
+    <h1>Профиль <a th:text="${username}"></a></h1>
+</div>
+</body>
+</html>
