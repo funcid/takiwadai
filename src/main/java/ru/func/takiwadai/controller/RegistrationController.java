@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.func.takiwadai.entity.user.User;
 import ru.func.takiwadai.entity.user.UserRole;
@@ -28,23 +27,22 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public ModelAndView addUser(@RequestParam String username,
-                                @RequestParam String password) {
+    public ModelAndView addUser(User user) {
         ModelAndView modelAndView = new ModelAndView("registration");
-        Optional<User> userFromDb = userRepo.findByUsername(username);
+        Optional<User> userFromDb = userRepo.findByUsername(user.getUsername());
 
-        if (!userFromDb.isPresent()) {
+        if (userFromDb.isPresent()) {
             modelAndView.addObject("message", "Имя занято!");
             return modelAndView;
         }
 
         userRepo.save(User.builder()
-                .password(password)
+                .username(user.getUsername())
+                .password(user.getPassword())
                 .email("none")
                 .activationCode("none")
                 .active(true)
                 .registrationTimestamp(new Date().getTime())
-                .username(username)
                 .userRole(UserRole.ADMIN)
                 .build()
         );
