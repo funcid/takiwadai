@@ -1,18 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>signin</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/background.css">
 </head>
 <body>
-Login page
-<form action="/login" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-<a href="/registration">Add new user</a>
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
+        <a class="nav-link" title="Главная" href="http://localhost:8080/"><img width="60%" height="60%"
+                                                               src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
+        <a class="nav-link" title="Профиль" th:href="${auth} ? '/profile' : '/login'"><img width="60%" height="60%"
+                                                                           src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
+    </div>
+</nav>
+<br>
+<br>
+<div class="container mb-0 main">
+    <div align="center">Войти на сайт</div>
+    <hr>
+
+
+    <form action="/login" method="post">
+        <div align="center"><label> Имя пользователя: <br><input placeholder="Введите имя пользователя" type="text"
+                                                                 size="30" name="username"/> </label></div>
+        <br>
+        <div align="center"><label> Пароль: <br><input placeholder="Введите пароль" type="password" size="30"
+                                                       name="password"/> </label></div>
+        <br>
+        <div align="center"><input title="Войти в систему" type="submit" style="height: 30px; width: 80px"
+                                   value="Войти"/></div>
+        <br>
+
+    </form>
+    <p align="center"><a title="Зарегистрировать новый аккаунт" href="/registration">Впервые на сайте?</a></p>
+    <br>
+    <br>
+</div>
 </body>
 </html>

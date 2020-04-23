@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>signup</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/background.css">
 </head>
 <body>
-<span th:text="${message}">[MESSAGE]</span>
-<form action="/registration" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
+        <a class="nav-link" title="Главная" href="http://localhost:8080/"><img width="60%" height="60%"
+                                                                               src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
+        <a class="nav-link" title="Профиль" th:href="${auth} ? '/profile' : '/login'"><img width="60%" height="60%"
+                                                                                           src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
+    </div>
+</nav>
+<br>
+<br>
+<div class="container mb-0 main">
+    <div align="center">Зарегистрироваться</div>
+    <hr>
+    <span th:text="${message}">[MESSAGE]</span>
+    <form action="/registration" method="post">
+
+        <div align="center"><label> Имя пользователя: <br><input placeholder="Придумайте имя пользователя" type="text"
+                                                                 size="30" name="username"/> </label></div>
+        <br>
+        <div align="center"><label> Пароль: <br><input placeholder="Придумайте надёжный пароль" type="password"
+                                                       size="30" name="password"/> </label></div>
+        <br>
+        <div align="center"><input type="submit" value="Зарегистрироваться"/></div>
+        <br>
+    </form>
+    <p align="center"><a title="Войти в существующий аккаунт" href="/login">Уже есть аккаунт?</a></p>
+    <br>
+    <br>
+</div>
 </body>
 </html>
