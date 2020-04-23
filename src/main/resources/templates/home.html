@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Takiwadai</title>
@@ -14,7 +14,7 @@
         <a class="nav-link" href="#">что?<img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
-        <a class="nav-link" href="/login"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" th:href="${auth} ? '/profile' : '/login'"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
 </nav>
