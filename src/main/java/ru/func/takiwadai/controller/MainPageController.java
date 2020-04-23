@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainPageController {
 
     @RequestMapping("/")
-    public String mainPage() {
-        return "main_page";
+    public String home() {
+        return "home";
     }
 }

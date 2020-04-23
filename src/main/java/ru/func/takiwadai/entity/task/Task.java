@@ -1,11 +1,10 @@
 package ru.func.takiwadai.entity.task;
 
+import lombok.*;
 import ru.func.takiwadai.entity.component.Lang;
 import ru.func.takiwadai.entity.user.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -15,17 +14,30 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@Entity
+@NoArgsConstructor
+@Table(name = "task")
 public class Task {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User author;
     private String heading;
-    private String condition;
+    private String content;
+    @ElementCollection
     private List<String> inputLines;
+    @ElementCollection
     private List<String> requiredOutput;
+    @ElementCollection
     private List<TaskTag> tags;
-    private long memoryLimit;
-    private long timeLimit;
-    private long createTimestamp;
+    private Long memoryLimit;
+    private Long timeLimit;
+    private Long createTimestamp;
+    @ElementCollection
     private List<Lang> accessibleLanguages;
+
 }
