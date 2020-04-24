@@ -71,7 +71,7 @@ public class RegistrationController {
     enum Checkers {
         USER_EXISTS((user, userRepository) -> userRepository.findByUsername(user.getUsername()).isPresent(), "Данный логин занят"),
         ILLEGAL_SIZE((user, userRepository) -> user.getPassword().length() < 6 || user.getPassword().length() > 42, "Пароль должен быть длиннее 6 и короче 42 символов"),
-        CONTAINS_SYMBOL((user, userRepository) -> user.getPassword().toUpperCase().equals(user.getPassword()), "Пароль дожен содержать один символ в нижнем регистре"),;
+        CONTAINS_SYMBOL((user, userRepository) -> user.getPassword().toUpperCase().equals(user.getPassword()), "Пароль должен содержать хотя бы один символ в нижнем регистре"),;
 
         private CheckPassword checker;
         private String badResponse;

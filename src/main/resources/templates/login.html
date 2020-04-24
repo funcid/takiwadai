@@ -2,20 +2,18 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>signin</title>
+    <title>Sigh In</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 </head>
 <body>
 <nav class="navbar navbar-dark bg-primary text-primary">
     <div class="container">
-        что?<a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
-        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
-        <a class="nav-link" title="Главная" href="http://localhost:8080/"><img width="60%" height="60%"
-                                                                               src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
-        <a class="nav-link" title="Профиль"><img width="60%" height="60%"
-                                                                                           src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
-        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
+        <a class="nav-link" title="Архив заданий" href="/archive"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        <a class="nav-link" title="Рейтинг" href="/rating"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
+        <a class="nav-link" title="Главная" href="http://localhost:8080/"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
+        <a class="nav-link" title="Профиль" th:href="${auth}?'/profile':'/login'"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" title="Выполненные задачи" href="/calendar"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
 </nav>
 <div class="container main h3 mb-0 center-block w-25">

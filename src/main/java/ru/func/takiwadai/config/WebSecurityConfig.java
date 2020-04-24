@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(
                         "/", "/static/**", "/assets/*", "/assets/css/*",
-                        "/assets/icons/*", "/assets/scripts/*", "/registration", "/profile"
+                        "/assets/icons/*", "/assets/scripts/*", "/registration", "/profile", "/archive", "/rating", "/calendar"
                 ).permitAll()
                 .anyRequest()
                 .authenticated()
