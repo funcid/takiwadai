@@ -12,11 +12,13 @@
         что?<a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
         <a class="nav-link" title="Главная" href="http://localhost:8080/"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
-        <a class="nav-link" title="Профиль" th:href="${auth} ? '/profile' : '/login'"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" title="Профиль" th:href="${auth}?'/profile':'/login'"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
 </nav>
 <div class="container mb-0 main">
+    <br>
+    <span th:hidden="${auth}?'false':'true'"><div class="alert alert-info h5" role="alert">Вы успешно авторизированны. Что бы выйти из аккаунта <a class="alert-link" href="/logout">нажмите сюда</a>.</div></span>
     <div class="p">Takiwadai</div><hr>
     <div>
         <h4>
