@@ -5,12 +5,11 @@
     <title>signup</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/background.css">
 </head>
 <body>
-<nav class="navbar navbar-dark bg-primary">
+<nav class="navbar navbar-dark bg-primary text-primary">
     <div class="container">
-        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        что?<a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
         <a class="nav-link" title="Главная" href="http://localhost:8080/"><img width="60%" height="60%"
                                                                                src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
@@ -19,26 +18,19 @@
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
 </nav>
-<br>
-<br>
-<div class="container mb-0 main">
-    <div align="center">Зарегистрироваться</div>
+<div class="container main h3 mb-0 center-block w-25">
+    <br>
+    <span th:utext="${message}">[ERROR]</span>
+    <div><h1 align="center">Регистрация</h1></div>
     <hr>
-    <span th:text="${message}">[MESSAGE]</span>
-    <form action="/registration" method="post">
+    <form action="/registration" method="post" class="form-group">
 
-        <div align="center"><label> Имя пользователя: <br><input placeholder="Придумайте имя пользователя" type="text"
-                                                                 size="30" name="username"/> </label></div>
+        <div align="center"><label> Логин*: <br><input placeholder="Придумайте имя пользователя" type="text" class="form-control-lg" name="username"/> </label></div>
+        <div align="center"><label> Пароль*: <br><input placeholder="Придумайте надёжный пароль" type="password" class="form-control-lg" name="password"/> </label></div>
         <br>
-        <div align="center"><label> Пароль: <br><input placeholder="Придумайте надёжный пароль" type="password"
-                                                       size="30" name="password"/> </label></div>
-        <br>
-        <div align="center"><input type="submit" value="Зарегистрироваться"/></div>
-        <br>
-    </form>
-    <p align="center"><a title="Войти в существующий аккаунт" href="/login">Уже есть аккаунт?</a></p>
-    <br>
-    <br>
+        <div align="center"><input type="submit" class="btn-primary btn w-50" value="Зарегистрироваться"/></div>
+    </form><br><hr>
+    <p align="center" class="h4"><a href="/login">Уже есть аккаунт?</a></p><br>
 </div>
 </body>
 </html>

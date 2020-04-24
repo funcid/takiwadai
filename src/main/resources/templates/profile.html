@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <title>Takiwadai</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/background.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-primary">
+<nav class="navbar navbar-dark bg-primary text-primary">
     <div class="container">
-        <a class="nav-link" href="#">что?<img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        что?<a class="nav-link" href="#">что?<img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
         <a class="nav-link" href="/"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
         <a class="nav-link"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
         <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
 </nav>
-<div class="container mb-0 mt-5 main">
+<div class="container mb-0 main">
+    <div class="mt-5">
     <h1>Профиль <a th:text="${username}"></a></h1>
+    </div>
 </div>
 </body>
 </html>

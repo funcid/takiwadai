@@ -15,6 +15,8 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public ModelAndView profilePage(@AuthenticationPrincipal User user) {
+        if (user == null)
+            return new ModelAndView("login");
         ModelAndView profile = new ModelAndView("profile");
         profile.addObject("username", user.getUsername());
         return profile;
