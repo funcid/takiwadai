@@ -3,7 +3,6 @@ package ru.func.takiwadai.controller;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +12,6 @@ import ru.func.takiwadai.entity.user.UserRole;
 import ru.func.takiwadai.repository.UserRepository;
 
 import java.util.Date;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
@@ -36,8 +34,9 @@ public class RegistrationController {
         ModelAndView modelAndView = new ModelAndView("registration");
 
         AtomicBoolean haveError = new AtomicBoolean(false);
+        User finalUser = user;
         Stream.of(Checkers.values())
-                .filter(error -> error.getChecker().check(user, userRepo))
+                .filter(error -> error.getChecker().check(finalUser, userRepo))
                 .forEach(error -> {
                     haveError.set(true);
                             modelAndView.addObject(
@@ -48,7 +47,7 @@ public class RegistrationController {
         if (haveError.get())
             return modelAndView;
 
-        userRepo.save(User.builder()
+        user = User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .email("none")
@@ -56,8 +55,8 @@ public class RegistrationController {
                 .active(true)
                 .registrationTimestamp(new Date().getTime())
                 .userRole(UserRole.ADMIN)
-                .build()
-        );
+                .build();
+        userRepo.save(user);
         return new ModelAndView("login");
     }
 
