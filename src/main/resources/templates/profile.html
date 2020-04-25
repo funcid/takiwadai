@@ -10,11 +10,11 @@
 
 <nav class="navbar navbar-dark bg-primary text-primary">
     <div class="container">
-        что?<a class="nav-link" href="#">что?<img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
-        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
-        <a class="nav-link" href="/"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
-        <a class="nav-link"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
-        <a class="nav-link" href="#"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
+        <a class="nav-link" title="Архив заданий" href="archive.html"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        <a class="nav-link" title="Рейтинг" href="rating.html"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
+        <a class="nav-link" title="Главная" href="http://localhost:8080/"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
+        <a class="nav-link" title="Профиль" th:href="${auth}?'/profile':'/login'"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" title="Выполненные задачи" href="calendar.html"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
 </nav>
 <div class="container mb-0 main">
