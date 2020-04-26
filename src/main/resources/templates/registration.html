@@ -9,7 +9,7 @@
 <body>
 <nav class="navbar navbar-dark bg-primary text-primary">
     <div class="container">
-        <a class="nav-link" title="Архив заданий" href="/archive"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        <a class="text-primary">что?</a><a class="nav-link" title="Архив заданий" href="/archive"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
         <a class="nav-link" title="Рейтинг" href="/rating"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
         <a class="nav-link" title="Главная" href="http://localhost:8080/"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
         <a class="nav-link" title="Профиль" th:href="${auth}?'/profile':'/login'"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
@@ -23,8 +23,13 @@
     <hr>
     <form action="/registration" method="post" class="form-group">
 
-        <div align="center"><label> Логин*: <br><input placeholder="Придумайте имя пользователя" type="text" class="form-control-lg" name="username"/> </label></div>
-        <div align="center"><label> Пароль*: <br><input placeholder="Придумайте надёжный пароль" type="password" class="form-control-lg" name="password"/> </label></div>
+        <div align="center"><label>Логин *<br><input placeholder="Придумайте имя пользователя" type="text" class="form-control-lg" name="username"/> </label></div>
+        <div align="center"><label>Почта *<br><input placeholder="Укажите вашу почту" type="text" class="form-control-lg" name="email"/> </label></div>
+        <div align="center"><label>Пароль *<br><input placeholder="Придумайте надёжный пароль" type="password" class="form-control-lg" name="password"/> </label></div>
+        <hr>
+        <div align="center"><label>Где вы живете?<br><input type="text" class="form-control-lg" name="location"/> </label></div>
+        <div align="center"><label>Личный веб-сайт<br><input type="text" class="form-control-lg" name="website"/> </label></div>
+        <div align="center"><label>Аватар<br><input placeholder="выбрать" type="file" class="btn-info btn"/> </label></div>
         <br>
         <div align="center"><input type="submit" class="btn-primary btn w-50" value="Зарегистрироваться"/></div>
     </form><br><hr>

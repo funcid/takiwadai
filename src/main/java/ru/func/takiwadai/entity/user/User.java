@@ -27,6 +27,9 @@ public class User implements UserDetails {
     private String password;
     private String email;
     private Boolean active;
+    private Long perfectPoints;
+    private String location;
+    private String website;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private String activationCode;

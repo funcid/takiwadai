@@ -11,6 +11,4 @@ public class ArchiveController {
     public String archive() {
         return "archive";
     }
-
-
 }

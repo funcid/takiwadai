@@ -47,15 +47,12 @@ public class RegistrationController {
         if (haveError.get())
             return modelAndView;
 
-        user = User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .email("none")
-                .activationCode("none")
-                .active(true)
-                .registrationTimestamp(new Date().getTime())
-                .userRole(UserRole.ADMIN)
-                .build();
+        user.setPerfectPoints(0L);
+        user.setActivationCode("none");
+        user.setActive(true);
+        user.setRegistrationTimestamp(new Date().getTime());
+        user.setUserRole(UserRole.ADMIN);
+
         userRepo.save(user);
         return new ModelAndView("login");
     }
