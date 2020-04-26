@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Rating</title>
+    <title>Takiwadai > Rating</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 </head>
@@ -16,6 +16,10 @@
         <a class="nav-link" title="Выполненные задачи" href="/calendar"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
 </nav>
-<span th:hidden="${auth}?'true':'false'"><div class="alert alert-info h5" role="alert">Для просмотра своего места в рейтинге вам нужно <a class="alert-link" href="/login">авторизоваться</a>.</div></span>
+<div class="container mb-0 main">
+    <br>
+    <div align="center"><h1>Мировой рейтинг по <a title="PP - Performance Points или же очки производительности">PP </a></h1></div>
+    <br>
+</div>
 </body>
 </html>
