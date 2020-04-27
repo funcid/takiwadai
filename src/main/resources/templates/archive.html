@@ -16,6 +16,17 @@
         <a class="nav-link" title="Выполненные задачи" href="/calendar"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
 </nav>
-<span th:hidden="${auth}?'true':'false'"><div class="alert alert-info h5" role="alert">Для просмотра архива заданий вам нужно <a class="alert-link" href="/login">авторизоваться</a>.</div></span>
+<div class="container mb-0 main">
+    <br>
+    <div align="center"><h1>Архив задач</h1></div>
+    <tr th:each="task : ${tasks}">
+        <div class="alert alert-dark h3" role="alert">
+            <div class="badge badge-pill badge-light">#<td th:text="${task.id}">[ID]</td></div>
+            <td th:text="${task.heading}">[TITLE]</td>
+            <div class="badge badge-pill badge-info"><td th:text="${task.pp} == null ? 'не рейтинговая' : ${task.pp} + 'pp'">[PP]</td></div>
+        </div>
+    </tr>
+    <br>
+</div>
 </body>
 </html>

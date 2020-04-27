@@ -39,5 +39,5 @@ public class Task {
     private Long createTimestamp;
     @ElementCollection
     private List<Lang> accessibleLanguages;
-
+    private Long pp;
 }
