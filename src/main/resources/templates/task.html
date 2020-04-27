@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Takiwadai > Profile</title>
+    <title>Takiwadai > Task</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 </head>
@@ -22,22 +22,10 @@
         <a class="nav-link" title="Выполненные задачи" href="/calendar"><img width="60%" height="60%"
                                                                                  src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
     </div>
-</nav><br><br>
-<div class="container h3">
-    <div class="card">
-        <h1 class="card-header"><a th:text="${username}">[USERNAME]</a></h1>
-        <div class="card-body">
-            <img width="40%" height="70%" src="https://sun9-55.userapi.com/c205824/v205824086/d3113/ALCSNl1T60U.jpg">
-            <p class="card-text">
-                <a class="badge badge-pill badge-warning" th:text="${place}">[PLACE]</a>
-                <a th:class="${role}" th:text="${role_name}">[ROLE_NAME]</a>
-                <a class="badge badge-pill badge-secondary" th:text="${pp}">[PP]</a>
-            </p>
-            <br>
-            <a th:text="${location}">[LOCATION]</a><br>
-            <a th:href="${website}" th:text="${website}">[WEBSITE]</a><br><br>
-        </div>
-    </div>
+</nav>
+<div class="container main h3 mb-0 center-block w-50">
+    <br>
+    <h1 th:text="${title}"></h1>
 </div>
 </body>
 </html>
