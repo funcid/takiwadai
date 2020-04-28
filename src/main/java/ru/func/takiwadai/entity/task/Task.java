@@ -2,6 +2,7 @@ package ru.func.takiwadai.entity.task;
 
 import lombok.*;
 import ru.func.takiwadai.entity.component.Lang;
+import ru.func.takiwadai.entity.task.test.TestUnit;
 import ru.func.takiwadai.entity.user.User;
 
 import javax.persistence.*;
@@ -24,14 +25,12 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn
     private User author;
     private String heading;
     private String content;
-    @ElementCollection
-    private List<String> inputLines;
-    @ElementCollection
-    private List<String> requiredOutput;
+    @OneToMany
+    private List<TestUnit> tests;
     @ElementCollection
     private List<TaskTag> tags;
     private Long memoryLimit;
@@ -39,5 +38,5 @@ public class Task {
     private Long createTimestamp;
     @ElementCollection
     private List<Lang> accessibleLanguages;
-
+    private Long pp;
 }

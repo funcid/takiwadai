@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import ru.func.takiwadai.entity.user.User;
 import ru.func.takiwadai.repository.UserRepository;
 
 /**
@@ -20,6 +21,10 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         return userRepository.findByUsername(userName).get();
+    }
+
+    public Long getWorldPlace(User user) {
+        return userRepository.findPlaceByPerfectPoints(user.getPerfectPoints());
     }
 }
 

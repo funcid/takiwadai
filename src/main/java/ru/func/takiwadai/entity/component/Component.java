@@ -1,27 +1,37 @@
 package ru.func.takiwadai.entity.component;
 
+import lombok.*;
 import ru.func.takiwadai.entity.task.Task;
 import ru.func.takiwadai.entity.user.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.io.File;
+import javax.persistence.*;
 
 @Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@Entity
+@NoArgsConstructor
+@Table(name = "component")
 public class Component {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private User author;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Task task;
-    private long id;
     private Lang lang;
-    private String fileName;
+    private String name;
+    private String path;
     private String content;
-    private File file;
-    private boolean crash;
-    private long runtimeDuration;
-    private long memoryUsed;
-    private long bootTimestamp;
+    private Integer testPassed;
+    private Integer testCount;
+    private Boolean crash;
+    private Long runtimeDuration;
+    private Long memoryUsed;
+    private Long bootTimestamp;
 }

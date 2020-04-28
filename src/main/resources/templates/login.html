@@ -1,18 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Takiwadai > Sigh In</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/background.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 </head>
 <body>
-Login page
-<form action="/login" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-<a href="/registration">Add new user</a>
+<nav class="navbar navbar-dark bg-primary text-primary">
+    <div class="container">
+        <a class="text-primary">что?</a><a class="nav-link" title="Архив заданий" href="/archive"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        <a class="nav-link" title="Рейтинг" href="/rating"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
+        <a class="nav-link" title="Главная" href="/"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
+        <a class="nav-link" title="Профиль"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" title="Выполненные задачи" href="/calendar"><img width="60%" height="60%" src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
+    </div>
+</nav>
+<div class="container main h3 mb-0 center-block w-25">
+    <br>
+    <div><h1 align="center">Авторизация</h1></div>
+    <hr>
+    <form action="/login" align="center" class="form-group" method="post">
+        <div>Логин:<br><label><input placeholder="Введите имя пользователя" type="text" class="form-control-lg"
+                                                 name="username"/> </label></div>
+        <div>Пароль:<br><label><input placeholder="Введите пароль" type="password" class="form-control-lg"
+                                       name="password"/> </label></div>
+        <br>
+        <div><input class="btn btn-primary w-50 h1" title="Войти в систему" type="submit"
+                    value="Войти"/></div>
+    </form><br><hr>
+    <p align="center" class="h4"><a href="/registration">Впервые на сайте?</a></p><br>
+</div>
+</div>
 </body>
 </html>

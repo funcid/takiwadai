@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Takiwadai > Archive</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary text-primary">
+    <div class="container">
+        <a class="text-primary">что?</a><a class="nav-link" title="Архив заданий" href="/archive"><img width="60%"
+                                                                                                       height="60%"
+                                                                                                       src="/assets/icons/Tilda_Icons_1ed_book.svg"></a>
+        <a class="nav-link" title="Рейтинг" href="/rating"><img width="60%" height="60%"
+                                                                src="/assets/icons/Tilda_Icons_1ed_cup.svg"></a>
+        <a class="nav-link" title="Главная" href="/"><img width="60%" height="60%"
+                                                          src="/assets/icons/Tilda_Icons_1ed_brain.svg"></a>
+        <a class="nav-link" title="Профиль" th:href="${auth}?'/profile':'/login'"><img width="60%" height="60%"
+                                                                                       src="/assets/icons/Tilda_Icons_1ed_teacher.svg"></a>
+        <a class="nav-link" title="Выполненные задачи" href="/calendar"><img width="60%" height="60%"
+                                                                             src="/assets/icons/Tilda_Icons_1ed_calendar.svg"></a>
+    </div>
+</nav>
+<div class="container mb-0 main">
+    <br>
+    <div align="center"><h1>Архив задач</h1></div>
+    <tr th:each="task : ${tasks}">
+        <a th:href="'/task/' + ${task.id}">
+        <div class="alert alert-dark h4" role="alert">
+                <div class="badge badge-pill badge-light">#
+                    <td th:text="${task.id}">[ID]</td>
+                </div>
+            <td th:text="${task.heading}">[TITLE]</td>
+            <div class="badge badge-pill badge-info">
+                <td th:text="${task.pp} == null ? 'не рейтинговая' : ${task.pp} + 'pp'">[PP]</td>
+            </div>
+        </div>
+        </a>
+    </tr>
+    <br>
+</div>
+</body>
+</html>
