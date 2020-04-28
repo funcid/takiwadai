@@ -5,7 +5,6 @@ import ru.func.takiwadai.entity.task.Task;
 import ru.func.takiwadai.entity.user.User;
 
 import javax.persistence.*;
-import java.io.File;
 
 @Builder
 @Getter
@@ -26,9 +25,9 @@ public class Component {
     @JoinColumn
     private Task task;
     private Lang lang;
-    private String fileName;
+    private String name;
+    private String path;
     private String content;
-    private File file;
     private Boolean crash;
     private Long runtimeDuration;
     private Long memoryUsed;

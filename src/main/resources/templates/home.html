@@ -18,7 +18,7 @@
 </nav>
 <div class="container mb-0 main">
     <br>
-    <span th:hidden="${auth}?'false':'true'"><div class="alert alert-info h5" role="alert">Вы успешно авторизированны. Чтобы выйти из аккаунта <a class="alert-link" href="/logout">нажмите сюда</a>.</div></span>
+    <span th:hidden="!${auth}"><div class="alert alert-info h5" role="alert">Вы успешно авторизированны. Чтобы выйти из аккаунта <a class="alert-link" href="/logout">нажмите сюда</a>.</div></span>
     <div class="p">Takiwadai</div><hr>
     <div>
         <h4>

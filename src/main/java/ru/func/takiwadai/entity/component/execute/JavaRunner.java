@@ -17,30 +17,31 @@ public class JavaRunner implements Runner {
     public Runner execute(Component component) throws Exception {
 
         // Компилирование: .java -> .class
-        File file = new File(component.getFile().getAbsolutePath());
-        Process process = CMD.command("cmd.exe", "/c", "\"" + JAVAC_PATH + "\" " + file)
-                .redirectError(new File(PATH, "run/compile_error.txt"))
+        String userComponentPath = PATH + "/" + component.getAuthor().getUsername();
+        File file = new File(component.getPath());
+        Process process = CMD.command("cmd.exe", "/c", "\"" + JAVAC_PATH + "\" " + file.getAbsolutePath())
+                .redirectError(new File(userComponentPath, "compile_error.txt"))
                 .start();
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
             component.setCrash(reader.readLine() == null);
         }
 
-        component.setFile(new File(component.getFile().getAbsolutePath().replace(".java", ".class")));
+        component.setPath(component.getPath().replace(".java", ".class"));
         process.waitFor();
 
         // Запуск .class файла
-        CMD.command("cmd.exe", "/c", "\"" + JAVA_PATH + "\" " + component.getFile().getName().split("\\.")[0])
-                .directory(new File(PATH))
-                .redirectInput(new File(PATH, "run/input.txt"))
-                .redirectOutput(new File(PATH, "run/output.txt"))
-                .redirectError(new File(PATH, "run/runtime_error.txt"))
+        CMD.command("cmd.exe", "/c", "\"" + JAVA_PATH + "\" " + component.getName().split("\\.")[0])
+                .directory(new File(userComponentPath))
+                .redirectInput(new File(userComponentPath, "input.txt"))
+                .redirectOutput(new File(userComponentPath, "output.txt"))
+                .redirectError(new File(userComponentPath, "runtime_error.txt"))
                 .start()
                 .waitFor();
 
         // Удаление .class файла
-        if (component.getFile().delete())
-            component.setFile(file);
+        if (new File(component.getPath()).delete())
+            component.setPath(file.getAbsolutePath());
         return this;
     }
 }

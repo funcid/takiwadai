@@ -25,6 +25,8 @@
 </nav>
 <div class="container main h3 mb-0 center-block w-50">
     <br>
+          <span th:hidden="!${auth}" class="h5"><div class="alert alert-danger" role="alert">Что бы загрузить решение <a
+                  class="alert-link" href="/login">авторизируйтесь</a>.</div></span>
     <div>
         <a class="h1" th:text="${title}"></a>
         <div class="badge badge-pill badge-warning h3">
@@ -44,10 +46,11 @@
     </div>
     <hr>
     <div class="h5">
-        <label>
-            <input type="file" class="btn-dark btn">
-            <button class="btn btn-success">Проверить</button>
-        </label><br>
+        <form th:hidden="${auth}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" class="btn-dark btn">
+            <button type="submit" class="btn btn-success">Проверить</button>
+        </form>
+        <br>
     </div>
 </div>
 </body>

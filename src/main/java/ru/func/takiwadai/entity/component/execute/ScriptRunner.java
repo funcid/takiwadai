@@ -1,9 +1,8 @@
 package ru.func.takiwadai.entity.component.execute;
 
-import ru.func.takiwadai.entity.component.Component;
-import ru.func.takiwadai.entity.component.execute.Runner;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
+import ru.func.takiwadai.entity.component.Component;
 
 import java.io.File;
 
@@ -20,14 +19,15 @@ public class ScriptRunner implements Runner {
 
     @Override
     public Runner execute(Component component) throws Exception {
+        String userComponentPath = PATH + "/" + component.getAuthor().getUsername();
         CMD.command("cmd.exe", "/c", commandPattern
                 .replace("{$PATH}", executorPath)
-                .replace("{$ABS_FILE}", component.getFile().getAbsolutePath())
-                .replace("{$FILE}", component.getFile().getName())
-        ).directory(new File(PATH))
-                .redirectInput(new File(PATH, "run/input.txt"))
-                .redirectOutput(new File(PATH, "run/output.txt"))
-                .redirectError(new File(PATH, "run/runtime_error.txt"))
+                .replace("{$ABS_FILE}", component.getPath())
+                .replace("{$FILE}", component.getName())
+        ).directory(new File(userComponentPath))
+                .redirectInput(new File(userComponentPath, "run/input.txt"))
+                .redirectOutput(new File(userComponentPath, "run/output.txt"))
+                .redirectError(new File(userComponentPath, "run/runtime_error.txt"))
                 .start()
                 .waitFor();
         return this;
