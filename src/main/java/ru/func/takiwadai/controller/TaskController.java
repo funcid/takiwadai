@@ -13,15 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.func.takiwadai.entity.component.Component;
 import ru.func.takiwadai.entity.component.Lang;
 import ru.func.takiwadai.entity.task.Task;
+import ru.func.takiwadai.entity.task.test.TestUnit;
 import ru.func.takiwadai.entity.user.User;
-import ru.func.takiwadai.repository.TaskRepository;
+import ru.func.takiwadai.repository.ComponentRepository;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.stream.Stream;
+import java.util.List;
 
 /**
  * @author func 27.04.2020
@@ -31,7 +32,7 @@ import java.util.stream.Stream;
 public class TaskController {
 
     @Autowired
-    private TaskRepository taskRepository;
+    private ComponentRepository componentRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -62,49 +63,63 @@ public class TaskController {
             @RequestParam("file") MultipartFile file
     ) {
         if (file != null && file.getOriginalFilename() != null && !file.getOriginalFilename().isEmpty()) {
+            // Создание корневой папки, где будет тестирование, по формату ROOT/${USER_NAME}
             File root = new File(uploadPath + "/" + user.getUsername());
 
+            // Содание каталога
             if (!root.exists())
                 root.mkdirs();
 
-            Stream.of(Lang.values())
-                    .filter(lang -> file.getOriginalFilename().split("\\.")[1].equals(lang.getExpansion()))
-                    .forEach(lang -> {
-                        try {
+            // Перебор всех разрешшенных языков
+            List<Lang> langs = task.getAccessibleLanguages().isEmpty() ? Arrays.asList(Lang.values()) : task.getAccessibleLanguages();
+            for (Lang currentLang : langs) {
+                // Если расширение файла совпадает с расширением языка
+                if (file.getOriginalFilename().split("\\.")[1].equals(currentLang.getExpansion())) {
+                    try {
+                        // Сохранения файла в ROOT/${USER_NAME}/
+                        file.transferTo(new File(
+                                uploadPath + "/" +
+                                        user.getUsername() + "/" +
+                                        file.getOriginalFilename()
+                        ));
+                        // Создание компонента
+                        Component component = Component.builder()
+                                .author(user)
+                                .testPassed(0)
+                                .testCount(task.getTests().size())
+                                .crash(false)
+                                .path(root.getAbsolutePath() + "/" + file.getOriginalFilename())
+                                .lang(currentLang)
+                                .name(file.getOriginalFilename())
+                                .task(task)
+                                .bootTimestamp(new Date().getTime())
+                                .build();
+                        // Перебор всех тестов задачи
+                        for (TestUnit test : task.getTests()) {
+                            // Создаение текстовых файлов
                             new File(root.getAbsolutePath() + "/compile_error.txt").createNewFile();
                             new File(root.getAbsolutePath() + "/runtime_error.txt").createNewFile();
                             File input = new File(root.getAbsolutePath() + "/input.txt");
+                            // Заполнение input.txt, входными строками из теста
                             BufferedWriter writer = new BufferedWriter(new FileWriter(input));
-                            task.getInputLines().forEach(line -> {
-                                try {
-                                    writer.write(line);
-                                    writer.flush();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            });
+                            for (String line : test.getInputLines()) {
+                                writer.write(line);
+                                writer.flush();
+                            }
                             writer.close();
                             input.createNewFile();
                             new File(root.getAbsolutePath() + "/output.txt").createNewFile();
-                            file.transferTo(new File(
-                                    uploadPath + "/" +
-                                            user.getUsername() + "/" +
-                                            file.getOriginalFilename()
-                            ));
-                            Component component = Component.builder()
-                                    .author(user)
-                                    .crash(false)
-                                    .path(root.getAbsolutePath() + "/" + file.getOriginalFilename())
-                                    .lang(lang)
-                                    .name(file.getOriginalFilename())
-                                    .task(task)
-                                    .bootTimestamp(new Date().getTime())
-                                    .build();
-                            component.getLang().getRunner().execute(component);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            // Если программа выполниласи на ура, добавить решенную задачу
+                            if (component.getLang().getRunner().execute(component, test.getRequiredOutput()))
+                                component.setTestPassed(component.getTestPassed() + 1);
                         }
-                    });
+                        // Сохранение программы
+                        componentRepository.save(component);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
         return "archive";
     }

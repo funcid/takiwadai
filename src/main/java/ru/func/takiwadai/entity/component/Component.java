@@ -28,6 +28,8 @@ public class Component {
     private String name;
     private String path;
     private String content;
+    private Integer testPassed;
+    private Integer testCount;
     private Boolean crash;
     private Long runtimeDuration;
     private Long memoryUsed;
