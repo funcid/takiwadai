@@ -22,12 +22,9 @@
     <div class="p">Takiwadai</div><hr>
     <div>
         <h4>
-            <span class="badge badge-pill badge-warning">Java</span>
-            <span class="badge badge-pill badge-info">Python</span>
-            <span class="badge badge-pill badge-secondary">PHP</span>
-            <span class="badge badge-pill badge-danger">Ruby</span>
-            <span class="badge badge-pill badge-success">C++</span>
-            <span class="badge badge-pill badge-secondary">Perl</span>
+            <tr th:each="lang : ${langs}">
+                <span th:class="'badge badge-pill ' + ${lang.pillColor}"><a th:text="${lang.name}">[LANG]</a></span>
+            </tr>
         </h4>
         <br>
         <h4 class="description">Cовременная система с <a title="Перейти на GitHub проекта" href="https://github.com/funcid/Takiwadai">открытым исходным кодом</a> для тестирования<br>программ и соревнований за лучшее решение.</h4>

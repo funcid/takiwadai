@@ -4,6 +4,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import ru.func.takiwadai.entity.component.Lang;
 import ru.func.takiwadai.entity.user.User;
 
 /**
@@ -11,11 +12,12 @@ import ru.func.takiwadai.entity.user.User;
  * @project Takiwadai
  */
 @Controller
-public class MainPageController {
+public class HomeController {
 
     @RequestMapping("/")
     public ModelAndView home(@AuthenticationPrincipal User user) {
         ModelAndView modelAndView = new ModelAndView("home");
+        modelAndView.addObject("langs", Lang.values());
         modelAndView.addObject("auth", user != null);
         return modelAndView;
     }

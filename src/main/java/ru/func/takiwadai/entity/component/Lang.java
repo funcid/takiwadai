@@ -9,12 +9,14 @@ import ru.func.takiwadai.entity.component.execute.ScriptRunner;
 @AllArgsConstructor
 public enum Lang {
 
-    RUBY("Ruby", new ScriptRunner("\"{$PATH}\" {$FILE}", "C:\\Program Files\\ruby\\bin\\ruby.exe")),
-    PYTHON3("Python 3", new ScriptRunner("{$ABS_FILE}", "")),
-    PHP("PHP", new ScriptRunner("\"{$PATH}\" {$FILE}", "C:\\Program Files\\php\\php.exe")),
-    JAVA("Java 8", new JavaRunner()),;
+    RUBY("Ruby", ".rb", "badge-danger",new ScriptRunner("\"{$PATH}\" {$FILE}", "C:\\Program Files\\ruby\\bin\\ruby.exe")),
+    PYTHON3("Python 3", ".py", "badge-info", new ScriptRunner("{$ABS_FILE}", "")),
+    PHP("PHP", ".php","badge-secondary", new ScriptRunner("\"{$PATH}\" {$FILE}", "C:\\Program Files\\php\\php.exe")),
+    JAVA("Java 8", ".java","badge-warning", new JavaRunner()),;
   //  PEARL ("Pearl", new  ScriptRunner());
 
     private String name;
+    private String expansion;
+    private String pillColor;
     private Runner runner;
 }

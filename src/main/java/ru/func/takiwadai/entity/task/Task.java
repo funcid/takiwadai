@@ -24,7 +24,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn
     private User author;
     private String heading;
     private String content;
