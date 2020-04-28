@@ -51,7 +51,7 @@ public class RegistrationController {
         user.setActivationCode("none");
         user.setActive(true);
         user.setRegistrationTimestamp(new Date().getTime());
-        user.setUserRole(UserRole.ADMIN);
+        user.setUserRole(UserRole.STUDENT);
 
         userRepo.save(user);
         return new ModelAndView("login");
