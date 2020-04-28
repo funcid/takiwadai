@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import ru.func.takiwadai.entity.component.Component;
+import ru.func.takiwadai.entity.component.ComponentStatus;
 import ru.func.takiwadai.entity.component.Lang;
 import ru.func.takiwadai.entity.task.Task;
 import ru.func.takiwadai.entity.task.test.TestUnit;
@@ -57,11 +59,23 @@ public class TaskController {
     }
 
     @PostMapping("/task/{task}")
-    public String loadSolve(
+    public RedirectView loadSolve(
             @PathVariable Task task,
             @AuthenticationPrincipal User user,
             @RequestParam("file") MultipartFile file
     ) {
+        // Создание решения
+        Component component = componentRepository.save(Component.builder()
+                .author(user)
+                .testCount(task.getTests().size())
+                .testPassed(0)
+                .task(task)
+                .crash(false)
+                .status(ComponentStatus.PREPARE)
+                .bootTimestamp(new Date().getTime())
+                .build()
+        );
+
         if (file != null && file.getOriginalFilename() != null && !file.getOriginalFilename().isEmpty()) {
             // Создание корневой папки, где будет тестирование, по формату ROOT/${USER_NAME}
             File root = new File(uploadPath + "/" + user.getUsername());
@@ -82,18 +96,13 @@ public class TaskController {
                                         user.getUsername() + "/" +
                                         file.getOriginalFilename()
                         ));
-                        // Создание компонента
-                        Component component = Component.builder()
-                                .author(user)
-                                .testPassed(0)
-                                .testCount(task.getTests().size())
-                                .crash(false)
-                                .path(root.getAbsolutePath() + "/" + file.getOriginalFilename())
-                                .lang(currentLang)
-                                .name(file.getOriginalFilename())
-                                .task(task)
-                                .bootTimestamp(new Date().getTime())
-                                .build();
+                        // Уточнение компонента
+                        component.setPath(root.getAbsolutePath() + "/" + file.getOriginalFilename());
+                        component.setLang(currentLang);
+                        component.setName(file.getOriginalFilename());
+                        component.setStatus(ComponentStatus.START);
+                        // Сохранение программы
+                        componentRepository.save(component);
                         // Перебор всех тестов задачи
                         for (TestUnit test : task.getTests()) {
                             // Создаение текстовых файлов
@@ -110,17 +119,26 @@ public class TaskController {
                             input.createNewFile();
                             new File(root.getAbsolutePath() + "/output.txt").createNewFile();
                             // Если программа выполниласи на ура, добавить решенную задачу
-                            if (component.getLang().getRunner().execute(component, test.getRequiredOutput()))
+                            if (component.getLang().getRunner().execute(component, test.getRequiredOutput())) {
                                 component.setTestPassed(component.getTestPassed() + 1);
+                                component.setStatus(ComponentStatus.WORKING);
+
+                            } else
+                                component.setStatus(ComponentStatus.CRASHED);
+                            // Обновление и сохранение статуса запуска
+                            componentRepository.save(component);
                         }
-                        // Сохранение программы
-                        componentRepository.save(component);
+                        if(!component.getCrash())
+                            component.setStatus(ComponentStatus.DONE);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        component.setCrash(true);
+                        component.setStatus(ComponentStatus.CRASHED);
                     }
+                    // Сохранение программы
+                    componentRepository.save(component);
                 }
             }
         }
-        return "archive";
+        return new RedirectView("/component/" + component.getId());
     }
 }

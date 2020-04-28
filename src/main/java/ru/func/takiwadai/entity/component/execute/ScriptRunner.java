@@ -34,6 +34,7 @@ public class ScriptRunner implements Runner {
                     .waitFor();
             return checkCorrect(new File(userComponentPath, "output.txt"), requiredLines);
         } catch (Exception e) {
+            component.setCrash(true);
             return false;
         }
     }

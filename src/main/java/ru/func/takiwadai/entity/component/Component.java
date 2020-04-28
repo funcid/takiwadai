@@ -27,10 +27,13 @@ public class Component {
     private Lang lang;
     private String name;
     private String path;
-    private String content;
+    private String compilationError;
+    private String runtimeError;
+    private Boolean crash;
+    @Enumerated
+    private ComponentStatus status;
     private Integer testPassed;
     private Integer testCount;
-    private Boolean crash;
     private Long runtimeDuration;
     private Long memoryUsed;
     private Long bootTimestamp;

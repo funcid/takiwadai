@@ -1,6 +1,7 @@
 package ru.func.takiwadai.entity.component.execute;
 
 import ru.func.takiwadai.entity.component.Component;
+import ru.func.takiwadai.entity.component.ComponentStatus;
 
 import java.io.*;
 import java.util.List;
@@ -20,16 +21,19 @@ public class JavaRunner implements Runner {
             // Компилирование: .java -> .class
             String userComponentPath = PATH + "/" + component.getAuthor().getUsername();
             File file = new File(component.getPath());
+            File compilationErrorFile = new File(userComponentPath, "compile_error.txt");
             Process process = CMD.command("cmd.exe", "/c", "\"" + JAVAC_PATH + "\" " + file.getAbsolutePath())
-                    .redirectError(new File(userComponentPath, "compile_error.txt"))
+                    .redirectError(compilationErrorFile)
                     .start();
+            process.waitFor();
 
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
-                component.setCrash(reader.readLine() == null);
+            if (compilationErrorFile.length() > 0) {
+                component.setCrash(true);
+                component.setStatus(ComponentStatus.CRASHED);
+                return false;
             }
 
             component.setPath(component.getPath().replace(".java", ".class"));
-            process.waitFor();
 
             // Запуск .class файла
             CMD.command("cmd.exe", "/c", "\"" + JAVA_PATH + "\" " + component.getName().split("\\.")[0])
@@ -45,6 +49,7 @@ public class JavaRunner implements Runner {
                 component.setPath(file.getAbsolutePath());
             return checkCorrect(new File(userComponentPath, "output.txt"), requiredLines);
         } catch (Exception e) {
+            component.setCrash(true);
             return false;
         }
     }
